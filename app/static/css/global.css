@@ -1,0 +1,60 @@
+body {
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+    background-color: #003082;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #01173D;
+    border-bottom: 5px solid white;
+}
+.logo {
+    margin: 0;
+    font-size: 2rem;
+}
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.nav-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.2s;
+}
+.nav-link:hover {
+    color: #ddd;
+}
+.nav-icon i {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.2s;
+    margin-left: 20px;
+    padding: 10px
+}
+
+
+
+
+
+
+
+.return-button {
+    text-align: right;
+    color: white;
+    margin: 20px;
+    padding: px;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}

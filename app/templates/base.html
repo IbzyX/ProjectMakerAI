@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width, inital-scale=1.0">
 
     <title>{% block title %} Project Maker AI {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="{{ url_for('main.home_page') }}" class="return-button">PROJECT MAKER AI</a>
+        <div class="navbar-left">
+            <h1 class="logo">PROJECT MAKER AI</h1>
+        </div>
+        <div class="navbar-right">
+            <a href="{{ url_for('main.home_page') }}" class="nav-link">Home</a>
+            <a href="{{ url_for('main.generator_page') }}" class="nav-link">Generator</a>
+            <a href="{{ url_for('main.profile_page') }}" class="nav-icon">
+                <i class="fas fa-user" style="color: white;"></i>
+            </a>
+        </div>
     </nav>
 
     {% block content %} {% endblock %}
