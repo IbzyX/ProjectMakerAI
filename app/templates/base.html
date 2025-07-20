@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, inital-scale=1.0">
 
     <title>{% block title %} Project Maker AI {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
 </head>
 <body>
+
+    <nav class="navbar">
+        <a href="{{ url_for('main.home_page') }}" class="return-button">PROJECT MAKER AI</a>
+    </nav>
+
     {% block content %} {% endblock %}
 </body>
 </html>
