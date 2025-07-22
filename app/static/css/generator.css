@@ -1,0 +1,50 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.input-section, .output-section {
+    flex: 1; /* each takes 50% of height*/
+    padding: 20px
+    /*overflow-y: auto;*/
+}
+.divider {
+    height: 1px;
+    border-top: 2px dotted white;
+    margin: 0;
+}
+.textarea-input {
+
+    width: 100%;
+
+    max-width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+button {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: underline;
+    padding: 30px;
+    margin-left: 10px;
+}
