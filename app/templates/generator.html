@@ -8,20 +8,82 @@
 {% block content %} 
 
 <div class="container">
+    
     <div class="input-section">
         <h2>Generator</h2>
-        <form id="projectForm">
-            <label>Project Title</label>
 
-            <textarea id="project_idea" name="project_idea" class="textarea-input" rows="6" placeholder="Describe your project ..."></textarea><br>
+
+        <form id="projectForm">
+
+            <label for="title">Project Title</label><br>
+            <textarea id="title" class="input title"></textarea><br>
+
+            <label for="description">Description</label><br>
+            <textarea id="description" class="input description"></textarea><br>
+
+            <label for="features">Features</label><br>
+            <textarea id="features" class="input description"></textarea><br>
+            
+
+            <div class="inline-fields">
+                <div>
+                    <label for="type">Type</label><br>
+                    <textarea id="type" class="input short"></textarea>
+                </div>
+                <div>
+                    <label for="team_size">Team Size</label><br>
+                    <textarea id="team_size" class="input short"></textarea>
+                </div>
+                <div>
+                    <label for="time_span">Time Span</label><br>
+                    <textarea id="time_span" class="input short"></textarea>
+                </div>
+            </div>
+            
+
+
             <button type="submit">GENERATE</button>
+
         </form>
     </div>
+
+
     <div class="divider"></div>
 
-    <div class="output-section" id="outputContainer" style="display: none;">
+    <div class="output-section">
         <h2>AI Generated Output</h2>
-        <pre id="aiOutput"></pre>
+
+        <div class="output-block">
+            <h3>1. Project Scope</h3>
+            <textarea class="output-field size" readonly></textarea>
+        </div>
+
+        <div class="output-block">
+            <h3>2. Required Tasks</h3>
+            <textarea class="output-field size" readonly></textarea>
+        </div>
+
+        <div class="output-block">
+            <h3>3. Market Research</h3>
+            <textarea class="output-field size" readonly></textarea>
+        </div>
+
+        <div class="output-block">
+            <h3>4. Requirements</h3>
+            <textarea class="output-field size" readonly></textarea>
+        </div>
+
+        <div class="output-block">
+            <h3>5. Gantt Chart</h3>
+            <textarea class="output-field size" readonly></textarea>
+        </div>
+
+        <div class="output-block">
+            <h3>6. Flags</h3>
+            <textarea class="output-field size" readonly></textarea>
+        </div>
+        
+
         <a id="downloadLink" hefre="#" style="display: none;">Download Results</a>
     </div>
 </div>
