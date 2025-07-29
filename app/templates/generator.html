@@ -41,16 +41,19 @@
             </div>
             
 
-
-            <button type="button" id="generateBtn" class="btn">Generate</button>
+            <div class="btn-wrapper">
+                <button type="button" id="generateBtn" class="btn">Generate</button>
+            </div>
 
         </form>
     </div>
 
 
-    <div class="divider"></div>
+   
 
     <div id="outputSection" class="output-section" style="display: none;">
+        <div class="divider"></div>
+
         <h2>AI Generated Output</h2>
         <div class="output-block">
             <label for="scope">Scope:</label>
@@ -77,8 +80,13 @@
             <div class="output-box" id="output_flags"></div>
         </div>
         
+        <div class="btn-wrapper">
+            <button id="downloadBtn" class="btn">Download as PDF</button>
+            <span id="downloadError" class="error-message"></span>
+        </div>
 
-        <a id="downloadLink" hefre="#" style="display: none;">Download Results</a>
+        
+
     </div>
 </div>
 
@@ -87,4 +95,5 @@
 
 {% block script %}
 <script src="{{ url_for('static', filename='js/generator.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 {% endblock %}
