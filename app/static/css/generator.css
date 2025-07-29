@@ -8,15 +8,10 @@ html, body {
     margin-left: 50px;
     max-width: 800px;
 }
-.input-section, .output-section {
+input-section, output-section {
     flex: 1; /* each takes 50% of height*/
     padding: 20px
     /*overflow-y: auto;*/
-}
-.divider {
-    height: 1px;
-    border-top: 2px dotted white;
-    margin: 0;
 }
 
 
@@ -57,22 +52,42 @@ label {
 }
 
 
-.output-field.size {
-    height: 180px;
+
+
+.divider {
+    height: 1px;
+    border-top: 2px dotted white;
+    margin: 0;
+}
+
+
+
+
+.output-section {
+    color: white;
+    font-family: Arial;
+    margin-top: 30px;
+    max-width: 100%;
+}
+.output-block {
+    margin-bottom: 25px;
+}
+.output-box {
+    background-color: #0b2a50;
+    padding: 15px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+    white-space: pre-line;
+    min-height: 80px;
+    min-width: 90%;
 }
 
 
 
 
 
-
-
-
-
-
-
-
-button {
+.btn {
     padding: 20px 25px;
     margin-top: 20px;
     margin-left: 300px;
@@ -83,7 +98,7 @@ button {
     border-radius: 10px;
     cursor: pointer;
 }
-button:hover {
+.btn:hover {
     background-color: #0056b3;
 }
 h2 {

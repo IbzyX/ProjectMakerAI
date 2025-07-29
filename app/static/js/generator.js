@@ -1,16 +1,12 @@
-document.getElementById('projectForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    const idea = document.getElementById('project_idea').value;
+document.getElementById("generateBtn").addEventListener("click", function () {
+      // Show output section
+      document.getElementById("outputSection").style.display = "block";
 
-    const res = await fetch('/generate', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ idea })
+      // OPTIONAL: dummy data to test visuals
+      document.getElementById("output_scope").innerText = "";
+      document.getElementById("output_tasks").innerText = "";
+      document.getElementById("output_research").innerText = "";
+      document.getElementById("output_requirements").innerText = "";
+      document.getElementById("output_gantt").innerText = "";
+      document.getElementById("output_flags").innerText = "";
     });
-
-    const data = await res.json();
-    document.getElementById('aiOutput').innerText = data.output;
-    document.getElementById('outputContainer').style.display = 'block';
-    document.getElementById('downloadLink').style.display = 'inline';
-    document.getElementById('downloadLink').href = `/download/${data.file_id}`;
-});

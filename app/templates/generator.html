@@ -15,34 +15,34 @@
 
         <form id="projectForm">
 
-            <label for="title">Project Title</label><br>
+            <label for="title">Project Title:</label><br>
             <textarea id="title" class="input title"></textarea><br>
 
-            <label for="description">Description</label><br>
+            <label for="description">Description:</label><br>
             <textarea id="description" class="input description"></textarea><br>
 
-            <label for="features">Features</label><br>
+            <label for="features">Features:</label><br>
             <textarea id="features" class="input description"></textarea><br>
             
 
             <div class="inline-fields">
                 <div>
-                    <label for="type">Type</label><br>
+                    <label for="type">Type:</label><br>
                     <textarea id="type" class="input short"></textarea>
                 </div>
                 <div>
-                    <label for="team_size">Team Size</label><br>
+                    <label for="team_size">Team Size:</label><br>
                     <textarea id="team_size" class="input short"></textarea>
                 </div>
                 <div>
-                    <label for="time_span">Time Span</label><br>
+                    <label for="time_span">Time Span:</label><br>
                     <textarea id="time_span" class="input short"></textarea>
                 </div>
             </div>
             
 
 
-            <button type="submit">GENERATE</button>
+            <button type="button" id="generateBtn" class="btn">Generate</button>
 
         </form>
     </div>
@@ -50,37 +50,31 @@
 
     <div class="divider"></div>
 
-    <div class="output-section">
+    <div id="outputSection" class="output-section" style="display: none;">
         <h2>AI Generated Output</h2>
-
         <div class="output-block">
-            <h3>1. Project Scope</h3>
-            <textarea class="output-field size" readonly></textarea>
+            <label for="scope">Scope:</label>
+            <div class="output-box" id="output_scope"></div>
         </div>
-
         <div class="output-block">
-            <h3>2. Required Tasks</h3>
-            <textarea class="output-field size" readonly></textarea>
+            <label for="tasks">Tasks:</label>
+            <div class="output-box" id="output_tasks"></div>
         </div>
-
         <div class="output-block">
-            <h3>3. Market Research</h3>
-            <textarea class="output-field size" readonly></textarea>
+            <label for="research">Market Research:</label>
+            <div class="output-box" id="output_research"></div>
         </div>
-
         <div class="output-block">
-            <h3>4. Requirements</h3>
-            <textarea class="output-field size" readonly></textarea>
+            <label for="requirements">Requirements</label>
+            <div class="output-box" id="output_requirements"></div>
         </div>
-
         <div class="output-block">
-            <h3>5. Gantt Chart</h3>
-            <textarea class="output-field size" readonly></textarea>
+            <label for="gantt">Time Line:</label>
+            <div class="output-box" id="output_gantt"></div>
         </div>
-
         <div class="output-block">
-            <h3>6. Flags</h3>
-            <textarea class="output-field size" readonly></textarea>
+            <label for="flags">Flags:</label>
+            <div class="output-box" id="output_flags"></div>
         </div>
         
 
