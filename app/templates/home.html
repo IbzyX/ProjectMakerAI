@@ -6,10 +6,33 @@
 {% endblock %}
 
 {% block content %} 
-<div class="container">
-    
+<section class="cta">
+    <h2 class="hero-title">FROM IDEA TO PROJECT SCAFFOLD</h2>
+    <h2 class="hero-title">ALL WITH ONE PROMPT</h2>
+    <p class="hero-text">Sign up to generate your first project for free</p>
+    <a href="{{ url_for('main.profile_page') }}" class="cta-button">Sign up!</a>
+</section>
 
-</div>
+<hr class="divider" />
+
+<section class="how-it-works">
+    <h2 class="section-title">How it works</h2>
+
+    <div class="steps-container">
+        <div class="step">
+            <h3>1. Type your idea</h3>
+            <p>Enter your conecpt idea</p>
+        </div>
+        <div class="step">
+            <h3>2. AI builds structure</h3>
+            <p>AI geneartes project scope, requirements, timeline, and more</p>
+        </div>
+        <div class="step">
+            <h3>3. Preview & Done</h3>
+            <p>Download and save your new project scaffold instantly</p>
+        </div>
+    </div>
+</section>
 {% endblock %}
 
 {% block script %}{% endblock %}
