@@ -1,5 +1,6 @@
 console.log("JS loaded");
-document.getElementById('generateBtn').addEventListener('click', async () => {
+
+document.getElementById('projectForm').addEventListener('submit', async () => {
     console.log("generate button clicked")
     const data = {
         title: document.getElementById('title').value,
