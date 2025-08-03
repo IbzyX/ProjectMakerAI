@@ -113,7 +113,7 @@ def signup():
 
         
     flash("Signup successful! You can now log in.")
-    return redirect(url_for('main.profile_page'))
+    return redirect(url_for('main.profile_page') + '#login')
 
 
 
