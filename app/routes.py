@@ -103,7 +103,7 @@ def signup():
 
     exisiting_user = User.query.filter_by(email=email).first()
     if exisiting_user:
-        flash("User already exists.")
+        flash("User already exists.", "error")
         return redirect(url_for('main.profile_page') + '#login')
     
     new_user = User(email=email, username=username)
@@ -112,7 +112,7 @@ def signup():
     db.session.commit()
 
         
-    flash("Signup successful! You can now log in.")
+    flash("Signup successful! You can now log in.", "success")
     return redirect(url_for('main.profile_page') + '#login')
 
 
@@ -126,15 +126,15 @@ def login():
     user = User.query.filter_by(email=email). first()
     if user and user.check_password(password):
         login_user(user)
-        flash("Logged in successfully.")
+        flash("Logged in successfully.", "success")
         return redirect(url_for('main.generator_page'))
 
-    flash("Invalid email or password.")
-    return redirect(url_for('main.profile_page'))
+    flash("Invalid email or password.", "error")
+    return redirect(url_for('main.profile_page') + '#login')
 
 # --- Logout ---
 @main.route('/logout')
 def logout():
     logout_user()
-    flash("You have been logged out.")
+    flash("You have been logged out.", "logout")
     return redirect(url_for('main.home_page'))

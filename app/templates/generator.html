@@ -6,95 +6,89 @@
 {% endblock %}
 
 {% block content %} 
-{% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for message in messages %}
-                    <div class="alert">{{ message }}</div>
-                    {% endfor %}
+
+<div class="gen-wrapper">
+    <div class="container">
+        
+        <div class="input-section">
+            <h2>Generator</h2>
+
+
+            <form id="projectForm">
+
+                <label for="title">Project Title:</label><br>
+                <textarea id="title" name="title" class="input title" placeholder="Concept title" required></textarea><br>
+
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" class="input description" placeholder="General idea" required></textarea><br/>
+
+                <label for="features">Features:</label><br>
+                <textarea id="features" name="features" class="input description"></textarea><br>
+                
+
+                <div class="inline-fields">
+                    <div>
+                        <label for="type">Type:</label><br>
+                        <textarea id="type" name="type" class="input short"></textarea>
+                    </div>
+                    <div>
+                        <label for="team_size">Team Size:</label><br>
+                        <textarea id="team_size" name="team_size" class="input short"></textarea>
+                    </div>
+                    <div>
+                        <label for="time_span">Time Span:</label><br>
+                        <textarea id="time_span" name="time_span" class="input short"></textarea>
+                    </div>
                 </div>
-            {% endif %}
-        {% endwith %}
-<div class="container">
+                
+
+                <div class="btn-wrapper">
+                    <button type="submit" id="generateBtn" class="btn">Generate</button>
+                </div>
+
+            </form>
+        </div>
+
+
     
-    <div class="input-section">
-        <h2>Generator</h2>
 
+        <div id="outputSection" class="output-section" style="display: none;">
+            <div class="divider"></div>
 
-        <form id="projectForm">
-
-            <label for="title">Project Title:</label><br>
-            <textarea id="title" name="title" class="input title" placeholder="Concept title" required></textarea><br>
-
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" class="input description" placeholder="General idea" required></textarea><br/>
-
-            <label for="features">Features:</label><br>
-            <textarea id="features" name="features" class="input description" placeholder="Features for project" required></textarea><br>
-            
-
-            <div class="inline-fields">
-                <div>
-                    <label for="type">Type:</label><br>
-                    <textarea id="type" name="type" class="input short"></textarea>
-                </div>
-                <div>
-                    <label for="team_size">Team Size:</label><br>
-                    <textarea id="team_size" name="team_size" class="input short"></textarea>
-                </div>
-                <div>
-                    <label for="time_span">Time Span:</label><br>
-                    <textarea id="time_span" name="time_span" class="input short"></textarea>
-                </div>
+            <h2>AI Generated Output</h2>
+            <div class="output-block">
+                <label for="scope">Scope:</label>
+                <div class="output-box" id="output_scope"></div>
+            </div>
+            <div class="output-block">
+                <label for="tasks">Tasks:</label>
+                <div class="output-box" id="output_tasks"></div>
+            </div>
+            <div class="output-block">
+                <label for="research">Market Research:</label>
+                <div class="output-box" id="output_research"></div>
+            </div>
+            <div class="output-block">
+                <label for="requirements">Requirements</label>
+                <div class="output-box" id="output_requirements"></div>
+            </div>
+            <div class="output-block">
+                <label for="gantt">Time Line:</label>
+                <div class="output-box" id="output_gantt"></div>
+            </div>
+            <div class="output-block">
+                <label for="flags">Flags:</label>
+                <div class="output-box" id="output_flags"></div>
             </div>
             
-
             <div class="btn-wrapper">
-                <button type="submit" id="generateBtn" class="btn">Generate</button>
+                <button id="downloadBtn" class="btn">Download as PDF</button>
+                <span id="downloadError" class="error-message"></span>
             </div>
 
-        </form>
-    </div>
+            
 
-
-   
-
-    <div id="outputSection" class="output-section" style="display: none;">
-        <div class="divider"></div>
-
-        <h2>AI Generated Output</h2>
-        <div class="output-block">
-            <label for="scope">Scope:</label>
-            <div class="output-box" id="output_scope"></div>
         </div>
-        <div class="output-block">
-            <label for="tasks">Tasks:</label>
-            <div class="output-box" id="output_tasks"></div>
-        </div>
-        <div class="output-block">
-            <label for="research">Market Research:</label>
-            <div class="output-box" id="output_research"></div>
-        </div>
-        <div class="output-block">
-            <label for="requirements">Requirements</label>
-            <div class="output-box" id="output_requirements"></div>
-        </div>
-        <div class="output-block">
-            <label for="gantt">Time Line:</label>
-            <div class="output-box" id="output_gantt"></div>
-        </div>
-        <div class="output-block">
-            <label for="flags">Flags:</label>
-            <div class="output-box" id="output_flags"></div>
-        </div>
-        
-        <div class="btn-wrapper">
-            <button id="downloadBtn" class="btn">Download as PDF</button>
-            <span id="downloadError" class="error-message"></span>
-        </div>
-
-        
-
     </div>
 </div>
 

@@ -1,8 +1,12 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+.gen-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #001f4d;
+    padding: 20px;
 }
+
 .container {
     padding: 30px;
     margin-left: 100px;
@@ -123,12 +127,4 @@ label {
   font-size: 0.9rem;
   min-height: 1.2em; /* Reserve space even if empty */
 }
-.alert {
-    padding: 12px 16px;
-    margin: 10px 0;
-    border-radius: 5px;
-    background-color: #d7f8df;  /* Light red */
-    color: #1c7239;             /* Dark red text */
-    border: 1px solid #caf5c6;
-    font-weight: bold;
-}
+
