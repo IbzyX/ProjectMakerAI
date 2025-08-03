@@ -23,6 +23,11 @@
             </a>
         </div>
     </nav>
+    {% if session['user'] %}
+    Logged in as {{ session['user'] }}
+    {% else %}
+    Not logged in
+    {% endif %}
 
     <main>
         {% block content %} {% endblock %}

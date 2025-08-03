@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint, request, jsonify, redirect, flash, session, url_for
-from helpers import load_users, save_users
+from helpers import load_users, save_users, login_required 
 import openai 
 
 main = Blueprint('main',__name__)
@@ -14,6 +14,7 @@ def home_page():
 
 
 @main.route('/generator')
+@login_required
 def generator_page():
     return render_template('generator.html')
 
