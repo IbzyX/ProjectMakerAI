@@ -11,6 +11,13 @@ main = Blueprint('main',__name__)
 def home_page():
     return render_template('home.html')
 
+@main.route('/settings')
+def settings_page():
+    return render_template('settings.html')
+
+@main.route('/history')
+def history_page():
+    return render_template('history.html')
 
 
 
