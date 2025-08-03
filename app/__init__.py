@@ -7,6 +7,7 @@ import os
 from config import Config
 from dotenv import load_dotenv
 
+print("Loaded DB URI:", os.getenv("DATABASE_URL"))
 
 # Load enviroment variables 
 load_dotenv()
@@ -37,6 +38,9 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
+    
+    with app.app_context():
+        db.create_all()
 
     from app.routes import main 
     app.register_blueprint(main)

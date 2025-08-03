@@ -42,12 +42,12 @@
                 <button type="submit">Log</button>
             </form>
         </div>
-        {% if 'user' in session %}
-        <div class="logout-section">
-            <form action="{{ url_for('main.logout') }}" method="GET">
-                <button type="submit" class="logout-button">Logout</button>
-            </form>
-        </div>
+        {% if current_user.is_authenticated %}
+            <div class="logout-section">
+                <form action="{{ url_for('main.logout') }}" method="GET">
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
+            </div>
         {% endif %}
     </div>
 </div>
