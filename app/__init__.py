@@ -8,7 +8,9 @@ load_dotenv()
 def create_app():
     app = Flask(__name__)
 
+    app.secret_key = os.getenv("FLASK_SECRET_KEY")
     openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
     from .routes import main
     #from app.routes import main 

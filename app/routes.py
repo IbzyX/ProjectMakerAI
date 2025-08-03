@@ -1,4 +1,5 @@
-from flask import render_template, Blueprint, request, jsonify
+from flask import render_template, Blueprint, request, jsonify, redirect, flash, session, url_for
+from helpers import load_users, save_users
 import openai 
 
 main = Blueprint('main',__name__)
@@ -8,15 +9,15 @@ main = Blueprint('main',__name__)
 def home_page():
     return render_template('home.html')
 
-@main.route('/profile')
-def profile_page():
-    return render_template('profile.html')
+
+
+
 
 @main.route('/generator')
 def generator_page():
     return render_template('generator.html')
 
-
+# --- AI GENERATION ---
 @main.route("/generate", methods=["POST"])
 def generate():
     try:
@@ -83,3 +84,55 @@ def generate():
         return jsonify({"error": str(e)}), 500
 
 
+
+
+
+@main.route('/profile')
+def profile_page():
+    return render_template('profile.html')
+
+# --- Profile : SIGNUP ---
+@main.route('/signup', methods=['POST'])
+def signup():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    username = request.form.get('username')
+
+    users = load_users()
+
+    if email in users:
+        flash("User already exists.")
+        return redirect(url_for('main.profile_page') + '#login')
+
+    users[email] = {
+         'username': username,
+         'password': password
+        }
+    save_users(users)
+
+    flash("Signup successful! You can now log in.")
+    return redirect(url_for('main.profile_page'))
+
+
+
+# --- Profile : LOGIN ---
+@main.route('/login', methods=['POST'])
+def login():
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    users = load_users()
+    if email in users and users[email]['password'] == password:
+        session['user'] = email
+        flash("Logged in successfully.")
+        return redirect(url_for('main.generator_page'))
+
+    flash("Invalid email or password.")
+    return redirect(url_for('main.profile_page'))
+
+# --- Logout ---
+@main.route('/logout')
+def logout():
+    session.pop('user', None)
+    flash("You have been logged out.")
+    return redirect(url_for('main.home_page'))
