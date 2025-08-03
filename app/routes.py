@@ -1,5 +1,7 @@
 from flask import render_template, Blueprint, request, jsonify, redirect, flash, session, url_for
-from helpers import load_users, save_users, login_required 
+from flask_login import login_user, logout_user, login_required, current_user
+from app import db
+from app.models import User
 import openai 
 
 main = Blueprint('main',__name__)
@@ -99,18 +101,17 @@ def signup():
     password = request.form.get('password')
     username = request.form.get('username')
 
-    users = load_users()
-
-    if email in users:
+    exisiting_user = User.query.filter_by(email=email).first()
+    if exisiting_user:
         flash("User already exists.")
         return redirect(url_for('main.profile_page') + '#login')
+    
+    new_user = User(email=email, username=username)
+    new_user.set_password(password)
+    db.session.add(new_user)
+    db.session.commit()
 
-    users[email] = {
-         'username': username,
-         'password': password
-        }
-    save_users(users)
-
+        
     flash("Signup successful! You can now log in.")
     return redirect(url_for('main.profile_page'))
 
@@ -122,9 +123,9 @@ def login():
     email = request.form.get('email')
     password = request.form.get('password')
 
-    users = load_users()
-    if email in users and users[email]['password'] == password:
-        session['user'] = email
+    user = User.query.filter_by(email=email). first()
+    if user and user.check_password(password):
+        login_user(user)
         flash("Logged in successfully.")
         return redirect(url_for('main.generator_page'))
 
@@ -134,6 +135,6 @@ def login():
 # --- Logout ---
 @main.route('/logout')
 def logout():
-    session.pop('user', None)
+    logout_user()
     flash("You have been logged out.")
     return redirect(url_for('main.home_page'))
