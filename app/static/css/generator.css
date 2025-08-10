@@ -93,7 +93,49 @@ label {
     min-height: 80px;
     min-width: 90%;
 }
+#gantt {
+    background-color: #0b2a50;
+    border-radius: 20px;
+    padding: 15px;
+    min-height: 300px;
+    max-width: 90vw;
+    overflow-x: auto; 
+    overflow-y: hidden;
+    white-space: nowrap; 
+}
 
+.gantt-container {
+    background-color: transparent;
+}
+.gantt .bar {
+    fill: #007bff;
+    stroke: #0056b3;
+}
+.gantt .bar.progress {
+    fill: #00d458;
+}
+.gantt .bar-lable {
+    fill: white;
+    font-weight: 600;
+}
+.gantt .grid-row {
+    stroke: rgba(255, 255, 255, 0.1);
+}
+.gantt .grid-header {
+    fill: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .input.title, .input.description, .input.short {
+        width: 100%;
+    }
+    .container {
+        margin-left: 20px;
+        padding: 15px;
+        max-width: 100%;
+    }
+}
 
 
 
@@ -120,6 +162,35 @@ label {
 
 .btn:hover {
   background-color: #0056b3;
+}
+.spinner {
+  display: none;
+  margin-left: 10px;
+  width: 16px;
+  height: 16px;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+button.loading .btn-text {
+  opacity: 0.5;
+}
+
+button.loading .spinner {
+  display: inline-block;
 }
 .error-message {
   margin-top: 6px;

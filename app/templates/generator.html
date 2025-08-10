@@ -3,6 +3,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/generator.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/frappe-gantt/dist/frappe-gantt.css">
 {% endblock %}
 
 {% block content %} 
@@ -43,7 +44,10 @@
                 
 
                 <div class="btn-wrapper">
-                    <button type="submit" id="generateBtn" class="btn">Generate</button>
+                    <button type="submit" id="generateBtn" class="btn">
+                        <span class="btn-text">Generate</span>
+                        <span class="spinner" id="spinner"></span>
+                    </button>
                 </div>
 
             </form>
@@ -69,12 +73,12 @@
                 <div class="output-box" id="output_research"></div>
             </div>
             <div class="output-block">
-                <label for="requirements">Requirements</label>
+                <label for="requirements">Requirements:</label>
                 <div class="output-box" id="output_requirements"></div>
             </div>
             <div class="output-block">
                 <label for="gantt">Time Line:</label>
-                <div class="output-box" id="output_gantt"></div>
+                <div id="gantt"></div>
             </div>
             <div class="output-block">
                 <label for="flags">Flags:</label>
@@ -96,6 +100,7 @@
 {% endblock %}
 
 {% block script %}
-<script src="{{ url_for('static', filename='js/generator.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/frappe-gantt/dist/frappe-gantt.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/generator.js') }}"></script>
 {% endblock %}
