@@ -43,9 +43,11 @@
                 
 
                 <div class="btn-wrapper">
-                    <button type="submit" id="generateBtn" class="btn">Generate</button>
+                    <button type="submit" id="generateBtn" class="btn">
+                        <span class="btn-text">Generate</span>
+                        <span class="spinner" id="spinner"></span>
+                    </button>
                 </div>
-
             </form>
         </div>
 
@@ -74,7 +76,7 @@
             </div>
             <div class="output-block">
                 <label for="gantt">Time Line:</label>
-                <div class="output-box" id="output_gantt"></div>
+                <div class="output-box" id="gantt"></div>
             </div>
             <div class="output-block">
                 <label for="flags">Flags:</label>

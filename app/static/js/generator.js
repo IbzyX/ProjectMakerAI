@@ -1,7 +1,14 @@
 console.log("JS loaded");
 
-document.getElementById('projectForm').addEventListener('submit', async () => {
-    console.log("generate button clicked")
+document.getElementById('projectForm').addEventListener('submit', async (e) => {
+    e.preventDefault(); 
+    console.log("generate button clicked");
+
+    const generateBtn = document.getElementById('generateBtn');
+    const spinner = document.getElementById('spinner');
+    const outputSection = document.getElementById('outputSection');
+    const outputError = document.getElementById('downloadError');
+
     const data = {
         title: document.getElementById('title').value,
         description: document.getElementById('description').value,
@@ -10,17 +17,17 @@ document.getElementById('projectForm').addEventListener('submit', async () => {
         time_span: document.getElementById('time_span').value
     };
 
-    const outputSection = document.getElementById('outputSection');
-    const outputError = document.getElementById('downloadError');
     outputError.textContent = "";
     outputSection.style.display = 'none';
+
+    generateBtn.classList.add('loading');
 
     try {
         const response = await fetch('/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
-        });
+        });        
 
         const result = await response.json();
 
@@ -34,23 +41,34 @@ document.getElementById('projectForm').addEventListener('submit', async () => {
                 flags
             } = result.output;
 
-            // Update DOM
+            // Show text sections as plain text
             document.getElementById('output_scope').textContent = scope || "";
             document.getElementById('output_tasks').textContent = tasks || "";
             document.getElementById('output_research').textContent = research || "";
             document.getElementById('output_requirements').textContent = requirements || "";
-            document.getElementById('output_gantt').textContent = gantt || "";
-            document.getElementById('output_flags').textContent = flags || "";
+
+            // Flags - if empty or no real content, display 'No flags'
+            if (!flags || flags.trim().length === 0) {
+                document.getElementById('output_flags').textContent = "No flags.";
+            } else {
+                document.getElementById('output_flags').textContent = flags;
+            }
+
+
 
             outputSection.style.display = 'block';
+            outputSection.scrollIntoView({ behavior: 'smooth' });
+
         } else {
             outputError.textContent = "Error generating output.";
         }
+
     } catch (error) {
         outputError.textContent = "Error: " + error.message;
+    } finally {
+        generateBtn.classList.remove('loading');
     }
 });
-
 document.getElementById('downloadBtn').addEventListener('click', () => {
     const outputError = document.getElementById('downloadError');
     outputError.textContent = "";
@@ -60,7 +78,7 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
         { title: "Required Tasks", id: "output_tasks" },
         { title: "Market Research", id: "output_research" },
         { title: "Requirements", id: "output_requirements" },
-        { title: "Time Line", id: "output_gantt" },
+        { title: "Time Line", id: "gantt" },
         { title: "Input Flags", id: "output_flags" }
     ];
 
