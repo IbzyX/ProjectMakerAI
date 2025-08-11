@@ -82,6 +82,10 @@ def generate():
         ### 6. Flags
         - Note anything missing or unrealistic from the user's input
         - E.g., unclear team size, too short timeline, vague features
+        - Note any fixes 
+        -E.g., if the timeline is to short give a new time estimate, 
+        - If there are no issues leave it blank
+
 
         ---
 

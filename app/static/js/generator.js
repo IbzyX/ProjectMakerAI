@@ -4,33 +4,39 @@ console.log("Gantt data:", gantt);
 
 
 function renderGanttFromJSON(data) {
-  console.log("Rendering gantt with data:", data);
+    console.log("Final Gantt data to render:", data);
 
-  // Clear previous content if any
-    const ganttDiv = document.getElementById('gantt');
-    while (ganttDiv.firstChild) {
-    ganttDiv.removeChild(ganttDiv.firstChild);
-    }
+    const fixedData = data.map(task => ({
+        ...task,
+        start: new Date(task.start),
+        end: new Date(task.end)
+    }));
 
-
-  try {
-    const gantt = new Gantt("#gantt", data, {
-    view_mode: 'Week',
-    date_format: 'YYYY-MM-DD',
-    custom_popup_html: task => `
-        <div class="p-2 text-white">
-        <h5>${task.name}</h5>
-        <p>${task.start} → ${task.end}</p>
-        <p>Progress: ${task.progress}%</p>
-        </div>
-    `
+    const gantt = new Gantt("#gantt", fixedData, {
+        view_mode: 'Month',
+        date_format: 'YYYY-MM-DD',
+        custom_popup_html: task => `
+            <div class="details-container">
+                <h5>${task.name}</h5>
+                <p>Start: ${task.start.toISOString().split('T')[0]}</p>
+                <p>End: ${task.end.toISOString().split('T')[0]}</p>
+                <p>Progress: ${task.progress}%</p>
+            </div>
+        `
     });
 
+    // Scroll to first task automatically
+    const firstBar = document.querySelector('#gantt .bar-wrapper');
+    if (firstBar) {
+        const ganttContainer = document.querySelector('#gantt');
+        const containerRect = ganttContainer.getBoundingClientRect();
+        const barRect = firstBar.getBoundingClientRect();
+        
+        ganttContainer.scrollLeft = (barRect.left - containerRect.left) - 50; // 50px padding before bar
+    }
 
     console.log("Gantt chart instance created successfully.");
-  } catch (error) {
-    console.error("Error initializing Gantt chart:", error);
-  }
+
 }
 
 
