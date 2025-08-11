@@ -2,9 +2,9 @@ from flask import render_template, Blueprint, request, jsonify, redirect, flash,
 from flask_login import login_user, logout_user, login_required, current_user
 from app import db
 from app.models import User
-import openai 
+import openai
 
-main = Blueprint('main',__name__)
+main = Blueprint('main', __name__)
 
 
 @main.route('/')
@@ -12,13 +12,21 @@ def home_page():
     return render_template('home.html')
 
 
+@main.route('/settings')
+def settings_page():
+    return render_template('settings.html')
 
+
+@main.route('/history')
+def history_page():
+    return render_template('history.html')
 
 
 @main.route('/generator')
 @login_required
 def generator_page():
     return render_template('generator.html')
+
 
 # --- AI GENERATION ---
 @main.route("/generate", methods=["POST"])
@@ -74,6 +82,10 @@ def generate():
         ### 6. Flags
         - Note anything missing or unrealistic from the user's input
         - E.g., unclear team size, too short timeline, vague features
+        - Note any fixes 
+        -E.g., if the timeline is to short give a new time estimate, 
+        - If there are no issues leave it blank
+
 
         ---
 
@@ -110,16 +122,26 @@ def generate():
             return output_text[start:end].strip() if end != -1 else output_text[start:].strip()
 
         # Special extractor for the gantt JSON array
-        
+        import re, json
+        gantt_section = extract_section("Timeline Estimate")
+        match = re.search(r'\[\s*{[\s\S]*}\s*\]', gantt_section)
+        if match:
+            try:
+                gantt_data = json.loads(match.group(0))
+            except json.JSONDecodeError:
+                gantt_data = []
+        else:
+            gantt_data = []
 
-        
+        print("Gantt section raw: ", gantt_section)
+        print("Gantt parsed data:", gantt_data)
         return jsonify({
             "output": {
                 "scope": extract_section("Project Scope"),
                 "tasks": extract_section("Required Tasks"),
                 "research": extract_section("Market Research"),
                 "requirements": extract_section("Requirements"),
-                "gantt": extract_section("Gantt Chart"),
+                "gantt": gantt_data,  # Now an actual array, not markdown
                 "flags": extract_section("Flags"),
             }
         })
@@ -131,10 +153,10 @@ def generate():
 
 
 
-
 @main.route('/profile')
 def profile_page():
     return render_template('profile.html')
+
 
 # --- Profile : SIGNUP ---
 @main.route('/signup', methods=['POST'])
@@ -143,20 +165,18 @@ def signup():
     password = request.form.get('password')
     username = request.form.get('username')
 
-    exisiting_user = User.query.filter_by(email=email).first()
-    if exisiting_user:
+    existing_user = User.query.filter_by(email=email).first()
+    if existing_user:
         flash("User already exists.", "error")
         return redirect(url_for('main.profile_page') + '#login')
-    
+
     new_user = User(email=email, username=username)
     new_user.set_password(password)
     db.session.add(new_user)
     db.session.commit()
 
-        
     flash("Signup successful! You can now log in.", "success")
     return redirect(url_for('main.profile_page') + '#login')
-
 
 
 # --- Profile : LOGIN ---
@@ -165,7 +185,7 @@ def login():
     email = request.form.get('email')
     password = request.form.get('password')
 
-    user = User.query.filter_by(email=email). first()
+    user = User.query.filter_by(email=email).first()
     if user and user.check_password(password):
         login_user(user)
         flash("Logged in successfully.", "success")
@@ -173,6 +193,7 @@ def login():
 
     flash("Invalid email or password.", "error")
     return redirect(url_for('main.profile_page') + '#login')
+
 
 # --- Logout ---
 @main.route('/logout')

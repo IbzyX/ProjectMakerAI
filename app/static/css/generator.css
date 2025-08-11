@@ -1,5 +1,5 @@
 .gen-wrapper {
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,6 +92,71 @@ label {
     white-space: pre-line;
     min-height: 80px;
     min-width: 90%;
+}
+#gantt {
+    background-color: #0b2a50;
+    border-radius: 20px;
+    padding: 15px;
+    height: 400px; /* ensure fixed height so bars are visible */
+    min-height: 300px;
+    max-width: 90vw;
+    overflow-x: auto; 
+    overflow-y: hidden;
+    white-space: nowrap; 
+}
+
+/* Ensure inner SVG can scroll properly */
+#gantt svg {
+    min-width: 100%;
+    display: block;
+}
+
+/* Transparent container background */
+.gantt-container {
+    background-color: transparent;
+}
+
+#gantt .bar {
+    fill: red !important;
+    stroke: yellow !important;
+    opacity: 1 !important;
+}
+
+#gantt .bar-progress {
+    fill: #00d458 !important;
+    opacity: 1 !important;
+}
+
+#gantt .bar-group text {
+    fill: white !important;
+}
+
+/* Corrected class name for labels */
+.gantt .bar-label {
+    fill: white;
+    font-weight: 600;
+}
+
+/* Grid styles */
+.gantt .grid-row {
+    stroke: rgba(255, 255, 255, 0.1);
+}
+.gantt .grid-header {
+    fill: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .input.title, .input.description, .input.short {
+        width: 100%;
+    }
+    .container {
+        margin-left: 20px;
+        padding: 15px;
+        max-width: 100%;
+    }
 }
 
 

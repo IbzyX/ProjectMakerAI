@@ -8,3 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 5000);
   });
 });
+
+function toggleDropdown(event) {
+    event.preventDefault();
+    const dropdown = document.getElementById("userDropdown");
+    dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+}
+
+// Hide dropdown on outside click
+window.onclick = function(event) {
+    if (!event.target.closest('.dropdown')) {
+        const dropdown = document.getElementById("userDropdown");
+        if (dropdown) dropdown.style.display = "none";
+    }
+}
+
