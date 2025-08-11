@@ -30,8 +30,11 @@ This project showcases skills in full-stack development, AI integration, backend
 - **User authentication:** Secure signup and login functionality to save user-specific project histories.
 - **Project history management:** *This feature is currently under development and will allow authenticated users to view, revisit, and download past generated projects.*
 - **Database integration:** PostgreSQL with SQLAlchemy ORM manages users and project data persistently.
+- **Required input**
+  - project title
+  - concept idea for the project 
 - **AI output includes key features such as:**
-  - Project scope
+  - Project scope and insight 
   - Requirements
   - Market research
   - Flagged inputs for unrealistic or vague prompts
@@ -75,3 +78,17 @@ This project showcases skills in full-stack development, AI integration, backend
     ```bash
     git clone <https://github.com/yourusername/yourrepo.git>
     ```
+
+---
+
+## Coming Soon
+
+The following features are currently in development and will be available in future releases:
+
+- Complete **Project History Management** allowing users to easily access and manage their past AI-generated projects.
+- Continue **Prompt** to further detail response.
+- Enhanced **Gantt Timeline Generation** for detailed project scheduling and milestone tracking.
+- Improved **Flagging System** for better detection and feedback on unrealistic or vague project inputs.
+- new **AI feature** for helping with the concept idea 
+
+Stay tuned for updates!
