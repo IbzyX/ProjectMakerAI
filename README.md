@@ -86,7 +86,7 @@ This project showcases skills in full-stack development, AI integration, backend
 The following features are currently in development and will be available in future releases:
 
 - Complete **Project History Management** allowing users to easily access and manage their past AI-generated projects.
-- Continue **Prompt** to further detail response.
+- Continue **Prompt Edit** to further detail response.
 - Enhanced **Gantt Timeline Generation** for detailed project scheduling and milestone tracking.
 - Improved **Flagging System** for better detection and feedback on unrealistic or vague project inputs.
 - new **AI feature** for helping with the concept idea 
