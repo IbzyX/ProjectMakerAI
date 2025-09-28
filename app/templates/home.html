@@ -6,15 +6,16 @@
 {% endblock %}
 
 {% block content %} 
+<canvas class="connecting-dots"></canvas>
 
-
-
-<section class="cta">
-    <h2 class="hero-title">FROM IDEA TO PROJECT SCAFFOLD</h2>
-    <h2 class="hero-title">ALL WITH ONE PROMPT</h2>
-    <p class="hero-text">Sign up to generate your first project for free</p>
-    <a href="{{ url_for('main.profile_page') }}" class="cta-button">Sign up!</a>
-</section>
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h2 class="hero-title">FROM IDEA TO PROJECT SCAFFOLD</h2>
+            <h2 class="hero-title">ALL WITH ONE PROMPT</h2>
+            <p class="hero-text">Sign up to generate your first project for free</p>
+            <a href="{{ url_for('main.profile_page') }}" class="cta-button">Sign up!</a>
+        </div>
+    </section>
 
 <hr class="divider" />
 
@@ -38,4 +39,6 @@
 </section>
 {% endblock %}
 
-{% block script %}{% endblock %}
+{% block script %}
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+{% endblock %}
