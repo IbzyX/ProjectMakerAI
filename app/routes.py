@@ -2,31 +2,28 @@ from flask import render_template, Blueprint, request, jsonify, redirect, flash,
 from flask_login import login_user, logout_user, login_required, current_user
 from app import db
 from app.models import User
-import openai
+from openai import OpenAI  # ✅ Updated import
+
+client = OpenAI()  # ✅ Instantiate OpenAI client
 
 main = Blueprint('main', __name__)
-
 
 @main.route('/')
 def home_page():
     return render_template('home.html')
 
-
 @main.route('/settings')
 def settings_page():
     return render_template('settings.html')
-
 
 @main.route('/history')
 def history_page():
     return render_template('history.html')
 
-
 @main.route('/generator')
 @login_required
 def generator_page():
     return render_template('generator.html')
-
 
 # --- AI GENERATION ---
 @main.route("/generate", methods=["POST"])
@@ -83,9 +80,8 @@ def generate():
         - Note anything missing or unrealistic from the user's input
         - E.g., unclear team size, too short timeline, vague features
         - Note any fixes 
-        -E.g., if the timeline is to short give a new time estimate, 
+        -E.g., if the timeline is too short give a new time estimate, 
         - If there are no issues leave it blank
-
 
         ---
 
@@ -104,14 +100,16 @@ def generate():
         Respond in clear markdown format, with headings and bullet points.
         """
 
-        response = openai.ChatCompletion.create(
+        # ✅ New OpenAI SDK usage
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=1000,
             temperature=0.7
         )
 
-        output_text = response.choices[0].message["content"]
+        # ✅ Updated message content access
+        output_text = response.choices[0].message.content
 
         # Helper to extract markdown sections by heading name
         def extract_section(name):
@@ -124,7 +122,7 @@ def generate():
         # Special extractor for the gantt JSON array
         import re, json
         gantt_section = extract_section("Timeline Estimate")
-        match = re.search(r'\[\s*{[\s\S]*}\s*\]', gantt_section)
+        match = re.search(r'\[\s*{[\s\S]*?}\s*\]', gantt_section)
         if match:
             try:
                 gantt_data = json.loads(match.group(0))
@@ -141,7 +139,7 @@ def generate():
                 "tasks": extract_section("Required Tasks"),
                 "research": extract_section("Market Research"),
                 "requirements": extract_section("Requirements"),
-                "gantt": gantt_data,  # Now an actual array, not markdown
+                "gantt": gantt_data,
                 "flags": extract_section("Flags"),
             }
         })
@@ -152,11 +150,9 @@ def generate():
         return jsonify({"error": str(e)}), 500
 
 
-
 @main.route('/profile')
 def profile_page():
     return render_template('profile.html')
-
 
 # --- Profile : SIGNUP ---
 @main.route('/signup', methods=['POST'])
@@ -178,7 +174,6 @@ def signup():
     flash("Signup successful! You can now log in.", "success")
     return redirect(url_for('main.profile_page') + '#login')
 
-
 # --- Profile : LOGIN ---
 @main.route('/login', methods=['POST'])
 def login():
@@ -193,7 +188,6 @@ def login():
 
     flash("Invalid email or password.", "error")
     return redirect(url_for('main.profile_page') + '#login')
-
 
 # --- Logout ---
 @main.route('/logout')
