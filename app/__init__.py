@@ -7,10 +7,10 @@ import os
 from config import Config
 from dotenv import load_dotenv
 
-print("Loaded DB URI:", os.getenv("DATABASE_URL"))
+load_dotenv()
+
 
 # Load enviroment variables 
-load_dotenv()
 
 # Initializes extensions
 db = SQLAlchemy()
